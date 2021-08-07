@@ -58,9 +58,7 @@ def get_data(in_city, in_country):
 
 weather_key = '505339f29b05943380b4a2805cc0e1e4'
 
-# I first find the geographical coordinates for the city the user wants information on. I then use a get request to
-# collect data from the weather API about that location. I stored this information in a dictionary of dictionaries
-# called 'weather'.
+
 def get_weather(in_location):
     city = in_location[0] + ', ' + in_location[1]
     locate = Nominatim(user_agent='hibaaltaf')
@@ -77,9 +75,6 @@ def get_weather(in_location):
 
     print(weather)
 
-#Here, I go through "weather" and pull out information about current weather conditions which I then store in a list
-#called show_current_weather. I display this information to the user by calling show_current_weather() with the list
-#as a parameter.
     city_name = 'City Name: ' + in_location[0].capitalize()
     conditions = 'Conditions: ' + str(weather['current']['weather'][0]['description'])
     temperature = 'Temperature: ' + str(round(weather['current']['temp'])) + '°F'
@@ -103,7 +98,6 @@ def show_current_weather(in_list):
     x = 0.05
     y = 0.05
     i = 0
-    # current weather background
     cw_background = tk.PhotoImage('white_background.jpg')
     cw_background_label = tk.Label(frame2, image=cw_background)
     cw_background_label.place(x=0, y=0, relwidth=.98, relheight=0.25, relx=0.01, rely=0.02)
@@ -116,7 +110,6 @@ def show_current_weather(in_list):
             x += 0.28
             y = 0.05
         i += 1
-    # current weather image
     weather_icon = in_list[7]
     image_name = weather_icon + '.png'
     image = Image.open(image_name)
@@ -172,9 +165,6 @@ def hourly_weather():
     except:
         pass
 
-# In this function, I iterate through "weather" and pull out information like the forecasted temperature, feel like
-# temperature and wind speed for each day. I then store this information in a list called day_i and display this
-# information by calling show_daily_weather() with day_i as a parameter.
 def get_daily_weather():
 
     for i in range(0, 6):
@@ -191,12 +181,9 @@ def get_daily_weather():
         icon = weather['daily'][i]['weather'][0]['icon']
         day_i = [date, temperature, min_temperature, max_temperature, humidity, wind_speed, conditions, cloud_cover,
                  icon]
-        #called my procedural abstraction
         show_daily_weather(day_i)
     return
 
-# two_day_weather is a dictionary with lists of hourly data that is sorted into two to three different keys based on
-# the date that hour falls in. Hence, the keys are dates like '19-03-21'.
 day_x = 0.01
 def show_daily_weather(in_list):
     global day_x
