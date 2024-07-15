@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import font
-import geopy
 from geopy.geocoders import Nominatim
 from datetime import datetime
 import requests
@@ -77,8 +76,8 @@ def get_weather(in_location):
 
     city_name = 'City Name: ' + in_location[0].capitalize()
     conditions = 'Conditions: ' + str(weather['current']['weather'][0]['description'])
-    temperature = 'Temperature: ' + str(round(weather['current']['temp'])) + '°F'
-    feels_like = 'Feels Like: ' + str(round(weather['current']['feels_like'])) + '°F'
+    temperature = 'Temperature: ' + str(round(weather['current']['temp'])) + 'F'
+    feels_like = 'Feels Like: ' + str(round(weather['current']['feels_like'])) + 'F'
     wind_speed = 'Wind Speed: ' + str(round(weather['current']['wind_speed'])) + ' mph'
     visibility = 'Visibility: ' + str(round((weather['current']['visibility']) / 100)) + '%'
     humidity = 'Humidity: ' + str(round(weather['current']['humidity'])) + '%'
@@ -111,7 +110,7 @@ def show_current_weather(in_list):
             y = 0.05
         i += 1
     weather_icon = in_list[7]
-    image_name = weather_icon + '.png'
+    image_name = 'media/' + weather_icon + '.png'
     image = Image.open(image_name)
     image = image.resize((170, 170), Image.ANTIALIAS)
     image = ImageTk.PhotoImage(image)
@@ -142,8 +141,8 @@ def hourly_weather():
             hour = str(int(hour)) + 'PM'
         else:
             hour = str(hour) + 'AM'
-        temp = 'Temperature: {}°F'.format(round(weather['hourly'][i]['temp']))
-        feels_like = 'Feels Like: {}°F'.format(round(weather['hourly'][i]['feels_like']))
+        temp = 'Temperature: {}F'.format(round(weather['hourly'][i]['temp']))
+        feels_like = 'Feels Like: {}F'.format(round(weather['hourly'][i]['feels_like']))
         wind_speed = 'Wind Speed: {} mph'.format(round(weather['hourly'][i]['wind_speed']))
         conditions = str(weather['hourly'][i]['weather'][0]['description'])
         humidity = 'Humidity: {}%'.format(weather['hourly'][i]['humidity'])
@@ -171,9 +170,9 @@ def get_daily_weather():
         timestamp = weather['daily'][i]['dt']
         date = 'Date: ' + str(datetime.fromtimestamp(timestamp))
         date = date[:-9]
-        temperature = 'Temperature: ' + str(round(weather['daily'][i]['temp']['day'])) + '°F'
-        min_temperature = 'Minimum: ' + str(round(weather['daily'][i]['temp']['min'])) + '°F'
-        max_temperature = 'Maximum: ' + str(round(weather['daily'][i]['temp']['max'])) + '°F'
+        temperature = 'Temperature: ' + str(round(weather['daily'][i]['temp']['day'])) + 'F'
+        min_temperature = 'Minimum: ' + str(round(weather['daily'][i]['temp']['min'])) + 'F'
+        max_temperature = 'Maximum: ' + str(round(weather['daily'][i]['temp']['max'])) + 'F'
         humidity = 'Humidity: ' + str(round(weather['daily'][i]['humidity'])) + '%'
         wind_speed = 'Wind Speed: ' + str(round(weather['daily'][i]['wind_speed'])) + 'mph'
         conditions = str(weather['daily'][i]['weather'][0]['description'])
@@ -203,7 +202,7 @@ def show_daily_weather(in_list):
     day_i_button.place(relwidth=.156, relheight=0.675, relx=day_x, rely=0.3)
     weather_icon = in_list[8]
     print(weather_icon)
-    image_name = weather_icon + '.png'
+    image_name = 'media/' + weather_icon + '.png'
     image = Image.open(image_name)
     image = image.resize((140, 140), Image.ANTIALIAS)
     image = ImageTk.PhotoImage(image)
@@ -245,7 +244,7 @@ def hourly_weather_description(date):
 
             weather_icon = hour[7]
             print(weather_icon)
-            image_name = weather_icon + '.png'
+            image_name = 'media/' + weather_icon + '.png'
             image = Image.open(image_name)
             image = image.resize((50, 45), Image.ANTIALIAS)
             image = ImageTk.PhotoImage(image)
@@ -301,7 +300,7 @@ def next_hours(in_date, in_dict):
             n_x = 0.925
 
             weather_icon = hour[7]
-            image_name = weather_icon + '.png'
+            image_name = 'media/' + weather_icon + '.png'
             image = Image.open(image_name)
             image = image.resize((50, 45), Image.ANTIALIAS)
             image = ImageTk.PhotoImage(image)
