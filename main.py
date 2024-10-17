@@ -55,12 +55,12 @@ def get_data(in_city, in_country):
     get_weather(location)
     return location
 
-weather_key = '505339f29b05943380b4a2805cc0e1e4'
+weather_key = '' #hidden 
 
 
 def get_weather(in_location):
     city = in_location[0] + ', ' + in_location[1]
-    locate = Nominatim(user_agent='hibaaltaf')
+    locate = Nominatim(user_agent='weather_key = '505339f29b05943380b4a2805cc0e1e4'hibaaltaf')
     find_coordinates = locate.geocode(city)
     latitude = find_coordinates.latitude
     longitude = find_coordinates.longitude
@@ -68,7 +68,6 @@ def get_weather(in_location):
     url = 'https://api.openweathermap.org/data/2.5/onecall'
     get_request = requests.get(url,
                                params={'APPID': weather_key, 'lat': latitude, 'lon': longitude, 'units': 'imperial'})
-    #declared data abstraction
     global weather
     weather = get_request.json()
 
